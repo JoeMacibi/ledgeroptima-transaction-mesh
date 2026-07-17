@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ledgeroptima-telemetry-dashboard"
+version = "1.0.0"
+description = "Enterprise transaction telemetry portal with real-time monitoring and anomaly detection"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi==0.104.1",
+    "uvicorn[standard]==0.24.0",
+    "sqlalchemy==2.0.23",
+    "psycopg==3.1.14",
+    "alembic==1.12.1",
+    "python-dotenv==1.0.0",
+    "pydantic==2.5.0",
+    "pydantic-settings==2.1.0",
+    "jinja2==3.1.2",
+    "python-multipart==0.0.6",
+    "sqlalchemy-utils==0.41.1",
+    "numpy==1.26.2",
+    "scipy==1.11.4",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==7.4.3",
+    "pytest-asyncio==0.21.1",
+    "black==23.12.0",
+    "ruff==0.1.8",
+    "mypy==1.7.1",
+]

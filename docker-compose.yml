@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: telemetry_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: telemetry
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - telemetry_network
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: telemetry_api
+    environment:
+      DEBUG: "True"
+      LOG_LEVEL: "INFO"
+      DATABASE_URL: "postgresql+psycopg2://postgres:postgres@postgres:5432/telemetry"
+      SYNTHETIC_DATA_RATE: "100"
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - .:/app
+    command: python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    networks:
+      - telemetry_network
+
+volumes:
+  postgres_data:
+
+networks:
+  telemetry_network:
+    driver: bridge

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LedgerOptima Telemetry Dashboard</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">⚡ LedgerOptima</div>
+            <div class="status-indicator">
+                <span class="status-dot healthy" id="statusDot"></span>
+                <span id="statusText">System Healthy</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="dashboard">
+            <div class="summary-grid" id="summaryGrid">
+                <div class="summary-card loading">
+                    <div class="spinner"></div>
+                    <span>Loading metrics...</span>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <div class="tab active" data-tab="transactions">Real-time Transactions</div>
+                <div class="tab" data-tab="merchants">Merchant Analytics</div>
+                <div class="tab" data-tab="anomalies">Anomalies & Alerts</div>
+                <div class="tab" data-tab="performance">Query Performance</div>
+                <div class="tab" data-tab="health">System Health</div>
+            </div>
+
+            <div id="transactions" class="tab-content active">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title">Recent Transactions</h2>
+                        <div class="panel-controls">
+                            <button class="refresh-btn" onclick="refreshTransactions()" title="Refresh">🔄</button>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div id="transactionList" class="transaction-list">
+                            <div class="loading">
+                                <div class="spinner"></div>
+                                <span>Loading transactions...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="merchants" class="tab-content">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title">Merchant Performance</h2>
+                        <div class="panel-controls">
+                            <button class="refresh-btn" onclick="refreshMerchants()" title="Refresh">🔄</button>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div id="merchantGrid" class="merchant-grid">
+                            <div class="loading">
+                                <div class="spinner"></div>
+                                <span>Loading merchant data...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="anomalies" class="tab-content">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title">Anomalies & Alerts</h2>
+                        <div class="panel-controls">
+                            <button class="refresh-btn" onclick="refreshAnomalies()" title="Refresh">🔄</button>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div id="anomalyList" class="anomaly-list">
+                            <div class="loading">
+                                <div class="spinner"></div>
+                                <span>Loading anomalies...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="performance" class="tab-content">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title">Slow Queries</h2>
+                        <div class="panel-controls">
+                            <button class="refresh-btn" onclick="refreshQueries()" title="Refresh">🔄</button>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div id="queryList" class="transaction-list">
+                            <div class="loading">
+                                <div class="spinner"></div>
+                                <span>Loading query data...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="health" class="tab-content">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title">System Health Metrics</h2>
+                        <div class="panel-controls">
+                            <button class="refresh-btn" onclick="refreshHealth()" title="Refresh">🔄</button>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div id="healthMetrics">
+                            <div class="loading">
+                                <div class="spinner"></div>
+                                <span>Loading health data...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/dashboard.js"></script>
+</body>
+</html>
